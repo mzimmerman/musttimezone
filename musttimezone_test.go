@@ -22,6 +22,7 @@ func TestParse(t *testing.T) {
 		{source: "Wed Jan 07 10:22:15 CST 2015", want: "2015-01-07 16:22:15", err: nil},
 		{source: "Wed Jan 07 10:22:15 DoesNotExist 2015", want: "2015-01-07 16:22:15", err: errors.New("parsing time \"Wed Jan 07 10:22:15 DoesNotExist 2015\" as \"Mon Jan 02 15:04:05 MST 2006\": cannot parse \"DoesNotExist 2015\" as \"MST\"")},
 		{source: "We Jan 07 10:22:15 CST 2015", want: "2015-01-07 16:22:15", err: errors.New("parsing time \"We Jan 07 10:22:15 CST 2015\" as \"Mon Jan 02 15:04:05 MST 2006\": cannot parse \"We Jan 07 10:22:15 CST 2015\" as \"Mon\"")},
+		{source: "Wed Jan 07 10:22:15 PST 2015", want: "2015-01-07 16:22:15", err: errors.New("Unable to find timezone for date - Wed Jan 07 10:22:15 PST 2015")},
 	}
 	for _, x := range times {
 		d, err := musttimezone.Parse("Mon Jan 02 15:04:05 MST 2006", x.source)
